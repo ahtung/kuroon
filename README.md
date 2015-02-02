@@ -1,5 +1,5 @@
 # How
 
-    foreman run -e Procfile.dev.env thor kuroon:clone 'user/repo'
+    foreman run thor kuroon:clone 'user/repo'
 
 
