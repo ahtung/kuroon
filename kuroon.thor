@@ -16,6 +16,6 @@ class Kuroon < Thor
     p client.create_repository("#{ project }", private: private == 'true' )
 
     return unless system("git push --mirror https://github.com/dunyakirkali/#{ project }.git")
-    return unless FileUtils.rm_rf('../#{project}') 
+    return unless FileUtils.rm_rf('../#{project}')
   end
 end
