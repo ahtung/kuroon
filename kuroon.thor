@@ -1,5 +1,4 @@
 require 'octokit'
-require 'highline'
 
 class Kuroon < Thor
 
@@ -7,6 +6,7 @@ class Kuroon < Thor
   method_option :repo, type: :string, required: true
   method_option :from, type: :string, default: :bitbucket
   method_option :to, type: :string, default: :github
+  method_option :private, type: :boolean, default: false
 
   def clone
     @user = /(.*)\//.match(options[:repo]).captures.first
@@ -22,11 +22,10 @@ class Kuroon < Thor
   private
 
   def create_repo
-    password = ask("pass? ") { |q| q.echo = false }
-    repo_private = ask("private? ") { |q| q.echo = false }
+    password = ask("pass? ", echo: false)
     if options[:to] == :github
       client = Octokit::Client.new(login: @user, password: password)
-      client.create_repository("#{ @project }", private: repo_private == 'true' )
+      client.create_repository("#{ @project }", private: options[:private])
     elsif options[:to] == :bitbucket
       # TODO
     end
