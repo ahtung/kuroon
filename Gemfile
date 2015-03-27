@@ -6,4 +6,4 @@ gem 'thor'
 gem 'octokit'
 gem 'foreman'
 gem 'highline'
-
+gem 'bitbucket_rest_api'
