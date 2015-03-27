@@ -2,12 +2,11 @@ require 'octokit'
 require 'highline'
 
 class Kuroon < Thor
-  desc 'clone', 'clone a repo from BitBucket to Git'
+  desc 'clone', 'clone a repo (dunyakirkali/project) from BitBucket or Git to BitBucket or Git'
+  method_option :repo, type: :string, required: true
+  method_option :options, type: :hash, default: { from: :bitbucket, to: :github }
   def clone(repo)
-    project = /\/(.*)/.match(repo).captures.first
-
-    p project
-    return unless system("git clone --bare https://bitbucket.org/#{ repo }.git ../#{project}")
+    return unless system("git clone --bare https://#{options[:from]}.org/#{ repo }.git ../#{project}")
     return unless Dir.chdir("../#{project}")
 
     password = ask("pass? ") { |q| q.echo = false }
