@@ -24,7 +24,11 @@ class Kuroon < Thor
   def create_repo
     password = ask("pass? ") { |q| q.echo = false }
     repo_private = ask("private? ") { |q| q.echo = false }
-    client = Octokit::Client.new(login: @user, password: password)
-    client.create_repository("#{ @project }", private: repo_private == 'true' )
+    if options[:to] == :github
+      client = Octokit::Client.new(login: @user, password: password)
+      client.create_repository("#{ @project }", private: repo_private == 'true' )
+    elsif options[:to] == :bitbucket
+      # TODO
+    end
   end
 end
