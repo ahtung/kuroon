@@ -16,7 +16,6 @@ GEM
     foreman (0.78.0)
       thor (~> 0.19.1)
     hashie (2.0.5)
-    highline (1.7.1)
     mini_portile (0.6.2)
     multi_json (1.11.0)
     multipart-post (1.2.0)
@@ -36,6 +35,5 @@ PLATFORMS
 DEPENDENCIES
   bitbucket_rest_api
   foreman
-  highline
   octokit
   thor
